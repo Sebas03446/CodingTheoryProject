@@ -43,13 +43,6 @@ const handleUserLoggedOut = () => {
   <div :class="{ 'overlay-active': isLoginMenuOpen || isSignUpMenuOpen }" class="flex flex-col min-h-screen">
     <Header @open-login-menu="handleOpenLoginMenu" @open-register-menu="handleOpenSignUpMenu" :isLoogedIn="isLogged" @user-logged-out="handleUserLoggedOut" />
     <About/>
-    <Footer />
-  </div>
-  <div v-if="isLoginMenuOpen" class="fixed inset-0 flex items-center justify-center">
-    <Login class="login-modal" @close-login-menu="handleCloseLoginMenu" @user-logged-in="handleUserLoggedIn" />
-  </div>
-  <div v-if="isSignUpMenuOpen" class="fixed inset-0 flex items-center justify-center">
-    <SignUp class="signup-modal" @close-signup-menu="handleCloseSignUpMenu" />
   </div>
 </template>
 

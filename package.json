@@ -31,9 +31,13 @@
     "@supabase/supabase-js": "^2.42.0",
     "@vue/test-utils": "^2.4.5",
     "chart.js": "^4.4.2",
+    "filepond": "^4.31.1",
+    "filepond-plugin-file-validate-type": "^1.2.9",
+    "filepond-plugin-image-preview": "^4.6.12",
     "happy-dom": "^14.7.1",
     "playwright-core": "^1.43.1",
     "vitest": "^1.5.3",
-    "vue-chartjs": "^5.3.1"
+    "vue-chartjs": "^5.3.1",
+    "vue-filepond": "^7.0.4"
   }
 }

@@ -10,6 +10,7 @@ export default {
         quaternary: "#00e6dd",
         quinary: "#E65000",
         senary: "#A65529",
+        black: "#000000",
       },
       fontFamily: {
         sans: ["AvertaDemo", "sans-serif"],
