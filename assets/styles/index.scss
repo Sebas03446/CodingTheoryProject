@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'AvertaDemo';
+    src: url('../fonts/AvertaDemo-Regular.otf') format('opentype');
+    font-weight: 400; // Normal weight
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'AvertaDemo';
+    src: url('../fonts/AvertaDemo-ExtraBoldItalic.otf') format('opentype');
+    font-weight: 800; // Extra bold weight
+    font-style: italic;
+  }
+  
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+    font-family: 'AvertaDemo', sans-serif;
+  }
+  
