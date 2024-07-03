@@ -114,6 +114,5 @@ export default {
 </script>
 
 <style>
-/* Add some basic styling */
 </style>
 
