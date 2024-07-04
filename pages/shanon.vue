@@ -1,10 +1,11 @@
 <script setup>
+
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen">
     <Header   />
-    <FileUpload />
+    <FileUploadShanon />
   </div>
 </template>
 

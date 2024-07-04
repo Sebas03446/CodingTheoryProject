@@ -1,16 +1,21 @@
 <template>
   <div id="app" class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-5">
     <div class="w-full max-w-lg p-5 bg-white shadow-lg rounded-lg">
-      <file-pond name="test" ref="pond" class="mb-5"
+      <file-pond
+        name="test"
+        ref="pond"
+        class="mb-5"
         label-idle="Arrastra y suelta tus archivos o <span class='filepond--label-action'> Busca </span>"
-        v-bind:allow-multiple="true" accepted-file-types="text/plain" v-bind:files="myFiles"
-        v-on:init="handleFilePondInit" v-on:addfile="handleFileUpload" />
+        v-bind:allow-multiple="true"
+        accepted-file-types="text/plain"
+        v-bind:files="myFiles"
+        v-on:init="handleFilePondInit"
+        v-on:addfile="handleFileUpload"
+      />
       <div class="flex flex-col items-center space-y-3">
-        <button class="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark" @click="compressFile">Comprimir
-          Archivo</button>
+        <button class="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark" @click="compressFile">Comprimir Archivo</button>
         <input type="file" class="file-input" @change="handleCompressedFileUpload" />
-        <button class="px-4 py-2 bg-secondary text-white rounded hover:bg-secondary-dark"
-          @click="decompressFile">Descomprimir Archivo</button>
+        <button class="px-4 py-2 bg-secondary text-white rounded hover:bg-secondary-dark" @click="decompressFile">Descomprimir Archivo</button>
       </div>
     </div>
     <div class="mt-5"></div> 
@@ -54,7 +59,6 @@
         </tr>
       </tbody>
     </table>
-
   </div>
 </template>
 
@@ -65,13 +69,12 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import {
   calculateFrequency,
-  buildHuffmanTree,
-  generateHuffmanCodes,
+  buildShannonFanoTable,
   encodeData,
   createBinaryData,
   extractCodesAndData,
-  huffmanDecode
-} from '~/assets/utils/huffman';
+  shannonFanoDecode
+} from '~/assets/utils/shannonFano';
 
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
@@ -81,12 +84,10 @@ const FilePond = vueFilePond(
 export default {
   name: "app",
   data: function () {
-    return {
-      myFiles: [], fileContent: null, compressedData: null,
+    return { myFiles: [], fileContent: null, compressedData: null,
       frequencyData: {},
-      huffmanTreeData: null,
       totalCharacters: 0
-    };
+     };
   },
   methods: {
     handleFilePondInit: function () {
@@ -105,20 +106,14 @@ export default {
     },
     compressFile() {
       if (!this.fileContent) return;
-
+      
       const text = this.fileContent;
       const frequency = calculateFrequency(text);
-      console.log(frequency);
       this.frequencyData = frequency;
+      const shannonFanoTable = buildShannonFanoTable(frequency);
+      const encodedData = encodeData(text, shannonFanoTable);
 
-      const huffmanTree = buildHuffmanTree(frequency);
-      console.log(huffmanTree);
-      this.huffmanTreeData = huffmanTree;
-
-      const huffmanCodes = generateHuffmanCodes(huffmanTree);
-      const encodedData = encodeData(text, huffmanCodes);
-
-      const binaryData = createBinaryData(huffmanCodes, encodedData);
+      const binaryData = createBinaryData(shannonFanoTable, encodedData);
       this.downloadCompressedFile(binaryData);
     },
     downloadCompressedFile(data) {
@@ -147,7 +142,7 @@ export default {
         .join('');
 
       const { codes, encodedData } = extractCodesAndData(binaryString);
-      const decodedData = huffmanDecode(encodedData, codes);
+      const decodedData = shannonFanoDecode(encodedData, codes);
       this.downloadDecompressedFile(decodedData);
     },
     downloadDecompressedFile(data) {
@@ -171,4 +166,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
