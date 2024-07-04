@@ -6,7 +6,6 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "pnpm add prisma --save-dev && nuxt prepare && prisma generate",
     "test": "vitest"
   },
   "devDependencies": {
