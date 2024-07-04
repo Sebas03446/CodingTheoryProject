@@ -7,20 +7,5 @@ export default defineNuxtConfig({
 
   },
   
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/supabase'],
-  nitro: {
-    plugins: ['./plugins/db-init.js'],
-  },
-
-  supabase: {
-    url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_KEY,
-    redirectOptions: {
-      login: '/',
-      callback: '/confirm',
-      include: ['/resetpassword/'],
-      exclude: ['/', '/about', '/members','/auth', '/forgotpassword','/test','/services', '/conditions'],
-      cookieRedirect: false,
-    
-  },
-}});
+  modules: ['@nuxtjs/tailwindcss'],
+});
